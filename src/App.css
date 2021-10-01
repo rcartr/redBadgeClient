@@ -2,17 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -28,11 +17,35 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.main {
+  text-align: left;
+}
+
+Button.buttonStyle {
+  /* margin-top: 10px;
+  margin-left: 5px;
+  margin-right: 5px; */
+  margin: 10px 5px 0px 5px;
+}
+
+Button.authFlip {
+  margin-bottom: 10px;
+}
+
+Button.authSubmit {
+  margin-top: 10px;
+}
+
+Button.loginButton {
+  margin-right: 20px;
+}
+
+Button.logoutButton {
+  margin-left: 20px;
+}
+
+.rightAlignBox {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
 }
