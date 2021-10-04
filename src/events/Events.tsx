@@ -5,8 +5,11 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { Button } from '@mui/material';
+import Button from '@mui/material/Button';
+
 import Title from '../site/Title';
+import EventCreate from './EventCreate';
+import APIURL from '../helpers/environment'
 
 type StateData = {
   id: number,
@@ -14,7 +17,9 @@ type StateData = {
   eventDate: string,
   eventDescription: string,
   createdBy: string,
-  clanId: number
+  clanId: number,
+  sessionToken: string,
+  eventsArray: any,
 }
 
 type PropsType = {
@@ -28,7 +33,8 @@ type StateType = {
   eventDate: string,
   eventDescription: string,
   createdBy: string,
-  clanId: number
+  clanId?: number
+  eventsArray?: [],
 }
 
 // Generate Event Data
@@ -42,49 +48,80 @@ function createData(
   return { id, eventDate, eventName, eventDescription, createdBy };
 }
 
-const rows = [
-  createData(
-    0,
-    '10 Oct 2021',
-    'Campaign grinding',
-    'Working through the campaign',
-    'Example',
-    ),
-  createData(
-    1,
-    '11 Oct 2021',
-    'Hardcore co-op',
-    'Working through the hardcore campaign together.',
-    'Archer',
-    ),
-  createData(
-      2, 
-      '14 Oct 2021', 
-      'Boss gear grinding', 
-      `Campaign boss raids. If you need better gear let's get it.`, 
-      'Jon Snow',
-    ),
-  createData(
-    3,
-    '16 Oct 2021',
-    'Endgame raids',
-    `If you're high level we need everyone for this. Let's get that epic gear!`,
-    'Jon Snow',
-    ),
-  createData(
-    4,
-    '18 Oct 2021',
-    'Campaign grinding',
-    'Working through the campaign.',
-    'Example',
-    ),
-];
+// const rows = [ // Example for events list
+//   createData(
+//     0,
+//     '10 Oct 2021',
+//     'Campaign grinding',
+//     'Working through the campaign',
+//     'Example',
+//     ),
+//   createData(
+//     1,
+//     '11 Oct 2021',
+//     'Hardcore co-op',
+//     'Working through the hardcore campaign together.',
+//     'Archer',
+//     ),
+//   createData(
+//       2, 
+//       '14 Oct 2021', 
+//       'Boss gear grinding', 
+//       `Campaign boss raids. If you need better gear let's get it.`, 
+//       'Jon Snow',
+//     ),
+//   createData(
+//     3,
+//     '16 Oct 2021',
+//     'Endgame raids',
+//     `If you're high level we need everyone for this. Let's get that epic gear!`,
+//     'Jon Snow',
+//     ),
+//   createData(
+//     4,
+//     '18 Oct 2021',
+//     'Campaign grinding',
+//     'Working through the campaign.',
+//     'Example',
+//     ),
+// ];
 
 function eventClick(event: React.MouseEvent) {
   event.preventDefault();
 }
 
 export default class Events extends React.Component<PropsType, StateType> {
+  constructor(props: PropsType) {
+    super(props)
+    this.state = {
+      id: 0,
+      eventDate: "",
+      eventName: "",
+      eventDescription: "",
+      createdBy: "",
+      eventsArray: [],
+    }
+    
+  }
+
+
+  componentDidMount() {
+
+    fetch(`${APIURL}/events/show`, {
+      method: 'GET',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.props.state.sessionToken}`
+      })
+    })
+      .then (response => response.json())
+      .then(events => this.setState({eventsArray: events}))
+      .then(() => console.log(this.state.eventsArray))
+      .catch(err => console.log(err))
+  }
+  
+        
+  
   render() {
 
     return (
@@ -101,17 +138,27 @@ export default class Events extends React.Component<PropsType, StateType> {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {/* {rows.map((row) => (
               <TableRow key={row.id}>
                 <TableCell>{row.eventDate}</TableCell>
                 <TableCell>{row.eventName}</TableCell>
                 <TableCell>{row.eventDescription}</TableCell>
                 <TableCell align="right">{`${row.createdBy}`}</TableCell>
               </TableRow>
-            ))}
+            ))} */}
+            {this.state.eventsArray?.map((data: any, index: any) => {
+              return (
+                <TableRow key={index}>
+                  <TableCell>{data.eventDate}</TableCell>
+                <TableCell>{data.eventName}</TableCell>
+                <TableCell>{data.eventDescription}</TableCell>
+                <TableCell align="right">{`${data.createdBy}`}</TableCell>
+              </TableRow>
+              )
+            })}
           </TableBody>
         </Table>
-        <Link color="primary" href="#" onClick={eventClick}>
+        <Link color="primary" href="" onClick={eventClick}>
           <Button variant="contained" size="small" className="buttonStyle">
           Add a new event
           </Button>

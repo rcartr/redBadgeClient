@@ -18,7 +18,7 @@ type StateData = {
 
 type PropsType = {
     state: StateData,
-    updateToken: any
+    updateToken: any,
 }
 
 type StateType = {
