@@ -8,6 +8,29 @@ import TableRow from '@mui/material/TableRow';
 import { Button } from '@mui/material';
 import Title from '../site/Title';
 
+type StateData = {
+  id: number,
+  eventName: string,
+  eventDate: string,
+  eventDescription: string,
+  createdBy: string,
+  clanId: number
+}
+
+type PropsType = {
+  state: StateData,
+  sessionToken: any
+}
+
+type StateType = {
+  id: number,
+  eventName: string,
+  eventDate: string,
+  eventDescription: string,
+  createdBy: string,
+  clanId: number
+}
+
 // Generate Event Data
 function createData(
   id: number,
@@ -61,37 +84,40 @@ function eventClick(event: React.MouseEvent) {
   event.preventDefault();
 }
 
-export default function Events() {
-  return (
-    <div className="main">
-    <React.Fragment>
+export default class Events extends React.Component<PropsType, StateType> {
+  render() {
+
+    return (
+      <div className="main">
+      <React.Fragment>
       <Title>Clan Events</Title>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Event</TableCell>
-            <TableCell>Description</TableCell>
-            <TableCell align="right">Created By</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.eventDate}</TableCell>
-              <TableCell>{row.eventName}</TableCell>
-              <TableCell>{row.eventDescription}</TableCell>
-              <TableCell align="right">{`${row.createdBy}`}</TableCell>
+        <Table size="small">
+          <TableHead>
+            <TableRow>
+              <TableCell>Date</TableCell>
+              <TableCell>Event</TableCell>
+              <TableCell>Description</TableCell>
+              <TableCell align="right">Created By</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      <Link color="primary" href="#" onClick={eventClick}>
-        <Button variant="contained" size="small" className="buttonStyle">
-        Add a new event
-        </Button>
-      </Link>
-    </React.Fragment>
-    </div>
-  );
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow key={row.id}>
+                <TableCell>{row.eventDate}</TableCell>
+                <TableCell>{row.eventName}</TableCell>
+                <TableCell>{row.eventDescription}</TableCell>
+                <TableCell align="right">{`${row.createdBy}`}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+        <Link color="primary" href="#" onClick={eventClick}>
+          <Button variant="contained" size="small" className="buttonStyle">
+          Add a new event
+          </Button>
+        </Link>
+      </React.Fragment>
+      </div>
+    );
+  }
 }

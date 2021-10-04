@@ -62,6 +62,7 @@ const Dashboard = (props: any) => {
     const handleOpen = () => { setOpen(true) };
     const handleClose = () => { setOpen(false) };
     //
+
     
 
 
@@ -142,7 +143,7 @@ const Dashboard = (props: any) => {
                     height: 240,
                   }}
                 >
-                  <ClanDisplay />
+                  <ClanDisplay state={props.state} sessionToken={props.sessionToken} />
                 </Paper>
               </Grid>
               {/* Clan Members List */}
@@ -163,7 +164,7 @@ const Dashboard = (props: any) => {
                 <Paper elevation={3}
                 sx={{ p: 2, display: 'flex', flexDirection: 'column' }}
                 >
-                  <Events />
+                  <Events state={props.state} sessionToken={props.sessionToken} />
                 </Paper>
               </Grid>
             </Grid>

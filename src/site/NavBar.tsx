@@ -14,12 +14,7 @@ import { Divider } from '@mui/material';
 export const navBarList = (
   <div>
     <ListSubheader>Dashboard</ListSubheader>
-    {/* <ListItem button>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary="Dashboard" />
-    </ListItem> */}
+   
     <ListItem button>
       <ListItemIcon>
         <PublicIcon />

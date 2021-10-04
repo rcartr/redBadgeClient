@@ -15,11 +15,7 @@ function App() {
   const [sessionToken, setSessionToken] = useState("");
 
 
-  useEffect(() => {
-    if(localStorage.getItem("token")){
-      setSessionToken(localStorage.getItem("token"));
-    }
-  }, [])
+  
 
   const updateToken = (newToken) => {
     localStorage.setItem("token", newToken);
@@ -38,11 +34,21 @@ function App() {
   //   )
   // }
 
+  // componentDidMount() {
+    useEffect(() => {
+      if(localStorage.getItem("token")){
+        setSessionToken(localStorage.getItem("token"));
+      } else {
+
+      }
+    }, [])
+  // }
+
   return (
     <div className="App">
       <React.Fragment>
             <Router>
-                <Dashboard clickLogout={clearToken} updateToken={updateToken} />
+                <Dashboard clickLogout={clearToken} updateToken={updateToken} sessionToken={sessionToken} />
                 
                 <Switch>
                     <Route exact path="/auth" component={ Auth } />
