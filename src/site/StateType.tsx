@@ -6,6 +6,7 @@ type StateType = {
     role?: string,
     name?: string,
     description?: string,
+    owner?: number,
     eventName?: string,
     eventDate?: string,
     eventDescription?: string,

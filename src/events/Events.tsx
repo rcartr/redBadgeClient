@@ -34,7 +34,7 @@ type StateType = {
   eventDescription: string,
   createdBy: string,
   clanId?: number
-  eventsArray?: [],
+  eventsArray: [],
 }
 
 // Generate Event Data
@@ -104,23 +104,23 @@ export default class Events extends React.Component<PropsType, StateType> {
     
   }
 
-
-  componentDidMount() {
-
+  fetchEvents = () => {
     fetch(`${APIURL}/events/show`, {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.props.state.sessionToken}`
+        'Authorization': `Bearer ${this.props.sessionToken}`
       })
     })
-      .then (response => response.json())
-      .then(events => this.setState({eventsArray: events}))
-      .then(() => console.log(this.state.eventsArray))
-      .catch(err => console.log(err))
+    .then (response => response.json())
+    .then(events => this.setState({eventsArray: events}))
+    .catch(err => console.log(`${err}`))
+  }
+
+  componentDidMount() {
+    this.fetchEvents()
   }
   
-        
   
   render() {
 
@@ -146,13 +146,13 @@ export default class Events extends React.Component<PropsType, StateType> {
                 <TableCell align="right">{`${row.createdBy}`}</TableCell>
               </TableRow>
             ))} */}
-            {this.state.eventsArray?.map((data: any, index: any) => {
+            {this.state.eventsArray.map((data: any) => {
               return (
-                <TableRow key={index}>
+                <TableRow key={data.id.value}>
                   <TableCell>{data.eventDate}</TableCell>
-                <TableCell>{data.eventName}</TableCell>
-                <TableCell>{data.eventDescription}</TableCell>
-                <TableCell align="right">{`${data.createdBy}`}</TableCell>
+                  <TableCell>{data.eventName}</TableCell>
+                  <TableCell>{data.eventDescription}</TableCell>
+                  <TableCell align="right">{`${data.createdBy}`}</TableCell>
               </TableRow>
               )
             })}
