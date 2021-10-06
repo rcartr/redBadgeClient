@@ -22,7 +22,7 @@ import ClanDisplay from '../clan/ClanDisplay';
 import Members from '../members/Members';
 import Events from '../events/Events';
 import Auth from '../auth/Auth';
-
+import { AppDialog, appDialogState } from '../helpers/AppDialog';
 
 
 const Dashboard = (props: any) => {
@@ -61,20 +61,19 @@ const Dashboard = (props: any) => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => { setOpen(true) };
     const handleClose = () => { setOpen(false) };
-    //
-
-    
+    // controls for AppDialog alerts
+    const handleSubmitClick = () => console.log('Dialog?!');
+    const handleLogout = () => {
+      localStorage.clear();
+      appDialogState(`You have been logged out.`, handleSubmitClick)
+    }
 
 
   return (
     <ThemeProvider theme={myTheme}>
       <Box sx={{ display: 'flex' }}>
         <AppBar position="absolute" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
-          <Toolbar
-            sx={{
-              pr: '24px', // keep right padding when drawer closed
-            }}
-          >
+          <Toolbar sx={{ pr: '24px' }}>
             
             <Typography
               component="h1"
@@ -96,7 +95,7 @@ const Dashboard = (props: any) => {
                     </DialogContent>
                 </Dialog>
             <Divider orientation="vertical" variant="middle" flexItem />
-            <Button className="logoutButton" color="inherit" startIcon={<LogoutIcon />} onClick={props.clickLogout}>Logout</Button>
+            <Button className="logoutButton" color="inherit" startIcon={<LogoutIcon />} onClick={handleLogout}>Logout</Button>
           </Toolbar>
         </AppBar>
         <Drawer
@@ -134,7 +133,7 @@ const Dashboard = (props: any) => {
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
               {/* Clan Overview */}
-              <Grid item xs={12} md={8} lg={9}>
+              <Grid item xs={12} md={7} lg={8}>
                 <Paper elevation={3}
                   sx={{
                     p: 2,
@@ -147,7 +146,7 @@ const Dashboard = (props: any) => {
                 </Paper>
               </Grid>
               {/* Clan Members List */}
-              <Grid item xs={12} md={4} lg={3}>
+              <Grid item xs={12} md={5} lg={4}>
                 <Paper elevation={3}
                   sx={{
                     p: 2,
@@ -156,7 +155,7 @@ const Dashboard = (props: any) => {
                     height: 240,
                   }}
                 >
-                  <Members />
+                  <Members state={props.state} sessionToken={props.sessionToken} />
                 </Paper>
               </Grid>
               {/* Clan Events */}
@@ -168,13 +167,11 @@ const Dashboard = (props: any) => {
                 </Paper>
               </Grid>
             </Grid>
+            <div className="footerDiv">
             <Typography variant="body2" color="text.secondary" align="center">
-                Copyright © 
-                <Link color="inherit" href="mailto:rbc.coding@gmail.com">
-                Richard Carter
-                </Link>
-                2021.
+                Copyright © Richard Carter 2021.
             </Typography>
+            </div>
           </Container>
         </Box>
       </Box>

@@ -8,6 +8,7 @@ import ClanDisplay from '../clan/ClanDisplay';
 import Members from '../members/Members';
 import Events from '../events/Events';
 import ProtectedRoutes from './ProtectedRoutes'
+import ContactMe from './Contact'
 
 
 // type StateData = {
@@ -26,20 +27,21 @@ type PropsType = {
 
 type StateType = {
   login: boolean,
-    email?: string,
-    password?: string,
-    username?: string,
-    role?: string,
-    name?: string,
-    description?: string,
-    owner?: number,
-    eventName?: string,
-    eventDate?: string,
-    eventDescription?: string,
-    createdBy?: string,
-    clanId?: number
-    eventsArray?: any,
-    sessionToken: string,
+  email?: string,
+  password?: string,
+  username?: string,
+  role?: string,
+  name?: string,
+  description?: string,
+  owner?: number,
+  eventName?: string,
+  eventDate?: string,
+  eventDescription?: string,
+  createdBy?: string,
+  id?: number,
+  clanId?: number,
+  eventsArray?: any,
+  sessionToken: string | null,
 }
 
 class Home extends React.Component<{}, StateType> {
@@ -60,10 +62,14 @@ class Home extends React.Component<{}, StateType> {
 
   clearToken = () =>{
     localStorage.clear();
-    setSessionToken("");
+    // setSessionToken("");
   }
 
-
+  componentDidMount() {
+    if(localStorage.getItem("token")){
+      this.setState({sessionToken: localStorage.getItem("token")})
+    }
+  }
 
   render() {
 
@@ -71,16 +77,17 @@ class Home extends React.Component<{}, StateType> {
       <div>
         <Router>
           <React.Fragment>
-            <Dashboard />
+            <Dashboard clickLogout={this.clearToken} updateToken={this.updateToken} sessionToken={this.state.sessionToken} />
             <Switch>
                 
-              <Route path="/dashboard"><Dashboard clickLogout={this.clearToken} updateToken={this.updateToken} sessionToken={this.state.sessionToken} /></Route>
+              <Route path="/" component={ Dashboard } />
               {/* <Route exact path="/auth"><Auth state={this.state} updateToken={this.updateToken} /> </Route> */}
               <Route path="/login"></Route>
               <Route path="/register"></Route>
               <Route exact path="/clan" component={ ClanDisplay } />
               <Route exact path="/members" component={ Members } />
-              <Route exact path="/events" component={ Events } />
+              {/* <Route exact path="/events"><Events /></Route> */}
+              {/* <Route exact path="/contact" component={ ContactMe } /> */}
             </Switch>
           </React.Fragment>
         </Router>
@@ -91,6 +98,6 @@ class Home extends React.Component<{}, StateType> {
 
 export default Home;
 
-function setSessionToken(arg0: string) {
-  throw new Error('Function not implemented.');
-}
+// function setSessionToken(arg0: string) {
+//   throw new Error('Function not implemented.');
+// }

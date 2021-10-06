@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Link from '@mui/material/Link'
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -9,9 +10,15 @@ import EventNoteIcon from '@mui/icons-material/EventNote';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import MessageIcon from '@mui/icons-material/Message';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import { Divider } from '@mui/material';
+import Divider from '@mui/material/Divider';
+
+import { AppDialog, appDialogState } from '../helpers/AppDialog';
+import ContactMe from './Contact';
+
+const handleSubmit = () => console.log('Dialog?!');
 
 export const navBarList = (
+  
   <div>
     <ListSubheader>Dashboard</ListSubheader>
    
@@ -19,7 +26,7 @@ export const navBarList = (
       <ListItemIcon>
         <PublicIcon />
       </ListItemIcon>
-      <ListItemText primary="Clan" />
+      <ListItemText primary="Create Clan" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
@@ -41,12 +48,16 @@ export const navBarList = (
     </ListItem>
     <Divider />
     <ListSubheader>Support</ListSubheader>
-    <ListItem button>
-      <ListItemIcon>
-        <MessageIcon />
-      </ListItemIcon>
-      <ListItemText primary="Contact" />
-    </ListItem>
+    <Link underline="none" href="mailto:rbc.coding@gmail.com">
+      <ListItem button onClick={() =>
+          appDialogState(`If your email client does not load, you can reach me at: rbc.coding@gmail.com`, handleSubmit)}>
+        <ListItemIcon>
+          <MessageIcon />
+        </ListItemIcon>
+        <ListItemText primary="Contact" />
+      </ListItem>
+      <AppDialog />
+    </Link>
     <ListItem button>
       <ListItemIcon>
         <AttachMoneyIcon />

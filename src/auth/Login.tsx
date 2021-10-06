@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
 import APIURL from "../helpers/environment";
+import { AppDialog, appDialogState } from '../helpers/AppDialog'
 
 type StateData = {
     login: boolean,
@@ -36,6 +37,8 @@ class Login extends React.Component<PropsType, StateType> {
         }
         this.handleLogin = this.handleLogin.bind(this)
     }
+
+    handleSubmitClick = () => console.log('Dialog?!');
 
     handleLogin(event: any) {
         event.preventDefault()
@@ -109,9 +112,11 @@ class Login extends React.Component<PropsType, StateType> {
                     onChange={(e) => this.statePassword(e)}
                 />
                 <Button className="authSubmit"
-                    type="submit" variant="contained" fullWidth>
+                    type="submit" variant="contained" fullWidth
+                    onClick={() => appDialogState('You are logged in!', this.handleSubmitClick)}>
                     Submit
                 </Button>
+                <AppDialog />
             </Box>
         </ThemeProvider>
             

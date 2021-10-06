@@ -62,7 +62,8 @@ type StateData = {
     render() {
         return (
             <div className="main">
-                <Title>Event Create component</Title>
+                <Title>New Event</Title>
+                
             </div>
         );
     };

@@ -11,7 +11,7 @@ type Props={
 
 const ProtectedRoutes = (props:Props) => {
     if(props.sessionToken){
-        return <Route path="/admin"><Dashboard state={props.state}/></Route>
+        return <Route path="/home"><Dashboard state={props.state}/></Route>
     } else {
     return(
         <Redirect to="/auth" />
