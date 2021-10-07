@@ -1,46 +1,17 @@
-# Getting Started with Create React App
+# EFA Red Badge Final Project
+This README covers our final project of the course to complete Red Badge. We were instructed to come up with a unique idea for a full stack web app that could showcase what we have learned and challenge us to push even further.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Clan Organizer
+I went back and forth with several ideas, but ultimately settled on trying my hand at a gaming clan organizer. As a single parent raising my three kids, I do not play games nearly as much as I once did. However, I still enjoy gaming and believe that making something I have a bit of a *personal connection to* is a great way to drive myself toward doing my best.
 
-## Available Scripts
+My intention was to make an app that could help social-minded online gamers organize their clan activity. Many games have built around the concept of clans and many are open-ended enough to allow gamers a great deal of flexibility in playing socially. The game series I probably had most in mind while developing this early version was Diablo, but my vision for the app has been very neutral.
 
-In the project directory, you can run:
+#### Functionality
+Upon visiting the site, you will see the main dashboard. I have built everything around this dashboard page as the center, wanting to truly develop a single page experience. To that end, I came up with rendering my components through modal dialogs. Typically this is not seen as a best practice, but I felt that focusing each action to a singular window with relatively simple controls would be an enjoyable experience.
 
-### `npm start`
+To log in, a user simply clicks on the Login button and is presented with a two-in-one dialog where they are presented with the option to register or flip to logging in via a clever ternary adapted from a previous project in the course. I struggled with a responsive action for logging in or registering, but did manage to implement a custom reusable dialog that I used to alert the user upon certain actions.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+After logging in, the functionality of the site opens up and the user is able to make use of what has been completed to this point. The dialogs are closable by simply clicking out of the box.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Dependencies
+For this client app, we needed to use React with TypeScript. I also decided to use Material UI for the interface library and made extensive use of some of its features. Overall I am quite happy with the UI for the app, but there are UI elements I feel could be improved upon a great deal through further development. I also made use of zustand for the custom reusable dialog.
