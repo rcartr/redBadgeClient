@@ -86,7 +86,7 @@ export default class ClanCreate extends React.Component<PropsType, StateType> {
         .then(res => res.json())
         .then((newClan => {
             console.log(newClan)
-            this.updateUserState(null, newClan.id)
+            this.updateUserState(newClan.role, newClan.id)
         }))
         .catch((err: any) => console.log(`${err}`))
     }
