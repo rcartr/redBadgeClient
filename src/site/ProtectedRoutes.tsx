@@ -1,21 +1,21 @@
-import React, {Component} from "react"
-import { Route, Redirect, RouteProps} from "react-router"
-import StateType from "./StateType"
-import Dashboard from './Dashboard'
+import * as React from "react"
+// import { Route, Redirect, RouteProps} from "react-router"
+// import StateType from "./StateType"
+// import Dashboard from './Dashboard'
 
-type Props={
-    sessionToken: any,
-    role?: any
-    state?: any
-}
+// type PropsType = {
+//     sessionToken: any,
+//     role?: any
+//     state?: any
+// }
 
-const ProtectedRoutes = (props:Props) => {
-    if(props.sessionToken){
-        return <Route path="/home"><Dashboard state={props.state}/></Route>
-    } else {
-    return(
-        <Redirect to="/auth" />
-    )}
-}
+// const ProtectedRoutes = (props:PropsType) => {
+//     if(props.sessionToken){
+//         return <Route path="/"><Dashboard state={props.state}/></Route>
+//     } else {
+//     return(
+//         <Redirect to="/auth" />
+//     )}
+// }
 
-export default ProtectedRoutes;
+// export default ProtectedRoutes;

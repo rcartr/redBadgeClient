@@ -9,6 +9,8 @@ import Button from '@mui/material/Button';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 import Title from '../site/Title';
 import EventCreate from './EventCreate';
@@ -27,7 +29,7 @@ type StateData = {
 
 type PropsType = {
   state: StateData,
-  sessionToken: string | null
+  sessionToken: string
 }
 
 type StateType = {
@@ -114,13 +116,14 @@ export default class Events extends React.Component<PropsType, StateType> {
                 <TableCell align="right">{`${row.createdBy}`}</TableCell>
               </TableRow>
             ))} */}
-            {this.state.eventsArray.map((events: any) => {
+            {this.state.eventsArray.map((events: any, index: any) => {
               return (
-                <TableRow key={events.id.value}>
+                <TableRow key={index}>
                   <TableCell>{events.eventDate}</TableCell>
                   <TableCell>{events.eventName}</TableCell>
                   <TableCell>{events.eventDescription}</TableCell>
                   <TableCell align="right">{`${events.createdBy}`}</TableCell>
+                  <TableCell><EditIcon fontSize="small" /><DeleteIcon fontSize="small"/></TableCell>
               </TableRow>
               )
             })}

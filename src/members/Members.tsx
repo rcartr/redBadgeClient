@@ -1,11 +1,12 @@
 import * as React from 'react';
-import Typography from '@mui/material/Typography'
+// import Typography from '@mui/material/Typography'
 import Table from '@mui/material/Table';
 import TableHead from '@mui/material/TableHead';
 import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 import RefreshIcon from '@mui/icons-material/Refresh';
 
 import Title from '../site/Title';
@@ -23,7 +24,7 @@ type StateData = {
   
   type PropsType = {
     state: StateData,
-    sessionToken: string | null
+    sessionToken: string
   }
   
   type StateType = {
@@ -83,7 +84,7 @@ export default class Members extends React.Component<PropsType, StateType> {
 
         return (
             <div className="membersDiv">
-                <Title>Members<Button startIcon={<RefreshIcon/>} onClick={this.fetchMembers} /></Title>
+                <Title>Members<IconButton aria-label="refresh" onClick={this.fetchMembers}><RefreshIcon fontSize="small"/></IconButton></Title>
                 <Table size="small">
                     <TableHead>
                         <TableRow>

@@ -1,10 +1,14 @@
 import * as React from 'react';
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider'
 import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import IconButton from '@mui/material/IconButton';
 import RefreshIcon from '@mui/icons-material/Refresh';
+import EditIcon from '@mui/icons-material/Edit';
 
+import ClanUpdate from './ClanUpdate';
 import Title from '../site/Title';
 import APIURL from "../helpers/environment";
 
@@ -15,11 +19,12 @@ type StateData = {
     name: string,
     description: string,
     owner: number,
+    sessionToken: string,
 }
 
 type PropsType = {
     state: StateData,
-    sessionToken: string | null,
+    sessionToken: string,
 }
 
 type StateType = {
@@ -81,13 +86,20 @@ export default class ClanDisplay extends React.Component<PropsType, StateType> {
         return (
             <div className="clanDiv">
                 <Box>
-                    <Title>Clan</Title>
-                    {this.state.clanArray.map((clan: any) => {
+                    <Title>Clan <IconButton aria-label="edit" onClick={this.handleOpen}><EditIcon fontSize="small" /></IconButton></Title>
+                        <Dialog id="clanUpdateModal"
+                                open={this.state.open}
+                                onClose={this.handleClose}
+                        >
+                            <DialogContent>
+                                <ClanUpdate state={this.props.state} sessionToken={this.props.sessionToken} />
+                            </DialogContent>
+                        </Dialog>
+                    {this.state.clanArray.map((clan: any, index: any) => {
                         return(
-                            <Box key={clan.id.value}>
+                            <Box key={index}>
                                 <Typography variant="h4" align="center">{clan.name}</Typography>
                                 <Typography variant="body1" align="center">{clan.description}</Typography>
-                                <Typography variant="subtitle1">Leader: {clan.owner}</Typography>
                             </Box>
                         )
                     }

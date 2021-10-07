@@ -7,25 +7,78 @@ import Drawer from '@mui/material/Drawer'
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
+// import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import Link from '@mui/material/Link';
+// import Link from '@mui/material/Link';
 import Divider from '@mui/material/Divider'
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-import { navBarList } from './NavBar';
+import NavBarList from './NavBar';
+import NavBarList1 from './NavBar1';
+import NavBarList2 from './NavBar2';
 import ClanDisplay from '../clan/ClanDisplay';
 import Members from '../members/Members';
 import Events from '../events/Events';
 import Auth from '../auth/Auth';
 import { AppDialog, appDialogState } from '../helpers/AppDialog';
 
+type StateData = {
+  login: boolean
+  email: string
+  password: string
+  username: string
+  role: string
+  name: string
+  description: string
+  owner: number
+  eventName: string
+  eventDate: string
+  eventDescription: string
+  createdBy: string
+  id: number
+  clanId: any
+  eventsArray: any
+  membersArray: any
+  open: boolean
+  clickLogout: any
+  sessionToken: string
+  updateToken: any
+}
 
-const Dashboard = (props: any) => {
+type PropsType = {
+  state: StateData,
+  sessionToken: string,
+  updateToken: any,
+  clickLogout: any,
+}
+
+type StateType = {
+  login: boolean,
+  email?: string,
+  password?: string,
+  username?: string,
+  role?: string,
+  name?: string,
+  description?: string,
+  owner?: number,
+  eventName?: string,
+  eventDate?: string,
+  eventDescription?: string,
+  createdBy?: string,
+  id?: number,
+  clanId?: any,
+  eventsArray?: any,
+  open?: boolean,
+  clickLogout: any
+  sessionToken: string,
+  updateToken: any,
+}
+
+const Dashboard = (props: PropsType) => {
     const drawerWidth: number = 210;
     const myTheme = createTheme({
         palette: {
@@ -44,18 +97,6 @@ const Dashboard = (props: any) => {
           },
     });
 
-    const style = {
-        position: 'absolute' as 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: 500,
-        bgcolor: '#37474f',
-        border: '2px solid #000',
-        boxShadow: 24,
-        p: 4,
-        
-      };
     
     // controls modal opening/closing
     const [open, setOpen] = React.useState(false);
@@ -82,7 +123,7 @@ const Dashboard = (props: any) => {
               align="left"
               sx={{ flexGrow: 1 }}
             >
-              Clan Organizer
+              Clan Organizer - Dashboard
             </Typography>
             <Button className="loginButton" color="inherit" startIcon={<LoginIcon />} onClick={handleOpen}>Login</Button>
                 <Dialog
@@ -115,7 +156,9 @@ const Dashboard = (props: any) => {
             }}
           >
           </Toolbar>
-          <List>{navBarList}</List>
+          <NavBarList state={props.state} sessionToken={props.sessionToken} updateToken={props.updateToken} />
+          <NavBarList1 state={props.state} sessionToken={props.sessionToken} updateToken={props.updateToken} />
+          <NavBarList2 state={props.state} sessionToken={props.sessionToken} />
         </Drawer>
         <Box
           component="main"

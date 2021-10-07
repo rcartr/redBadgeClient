@@ -4,44 +4,60 @@ import Dashboard from './Dashboard';
 // import Auth from '../auth/Auth';
 // import Register from '../auth/Register';
 // import Login from '../auth/Login';
-import ClanDisplay from '../clan/ClanDisplay';
-import Members from '../members/Members';
-import Events from '../events/Events';
-import ProtectedRoutes from './ProtectedRoutes'
-import ContactMe from './Contact'
+// import ClanDisplay from '../clan/ClanDisplay';
+// import Members from '../members/Members';
+// import Events from '../events/Events';
+// import ProtectedRoutes from './ProtectedRoutes'
+// import ContactMe from './Contact'
 
 
 // type StateData = {
 //   login: boolean,
-//   sessionToken: string,
-//   updateToken: string,
 //   email: string,
 //   password: string,
 //   username: string,
+//   role: string,
+//   name: string,
+//   description: string,
+//   owner: number,
+//   eventName: string,
+//   eventDate: string,
+//   eventDescription: string,
+//   createdBy: string,
+//   id: number,
+//   clanId: any,
+//   eventsArray: any,
+//   open: boolean,
+//   sessionToken: string | null,
 // }
 
 type PropsType = {
   // state: StateData,
+  // sessionToken: string | null,
   // updateToken: any
 }
 
 type StateType = {
   login: boolean,
-  email?: string,
-  password?: string,
-  username?: string,
-  role?: string,
-  name?: string,
-  description?: string,
-  owner?: number,
-  eventName?: string,
-  eventDate?: string,
-  eventDescription?: string,
-  createdBy?: string,
-  id?: number,
-  clanId?: number,
-  eventsArray?: any,
-  sessionToken: string | null,
+  email: string,
+  password: string,
+  username: string,
+  role: string,
+  name: string,
+  description: string,
+  owner: number,
+  eventName: string,
+  eventDate: string,
+  eventDescription: string,
+  createdBy: string,
+  id: number,
+  clanId: any,
+  eventsArray: any,
+  membersArray: any,
+  open: boolean,
+  clickLogout: any,
+  sessionToken: string,
+  updateToken: any,
 }
 
 class Home extends React.Component<{}, StateType> {
@@ -49,9 +65,28 @@ class Home extends React.Component<{}, StateType> {
     super(props)
     this.state = {
       login: false,
+      email: "",
+      password: "",
+      username: "",
+      role: "",
+      name: "",
+      description: "",
+      owner: 0,
+      eventName: "",
+      eventDate: "",
+      eventDescription: "",
+      createdBy: "",
+      id: 0,
+      clanId: 0,
+      eventsArray: [],
+      membersArray: [],
+      open: false,
+      clickLogout: "",
       sessionToken: "",
+      updateToken: "",
     }
-    this.updateToken = this.updateToken.bind(this)
+    this.updateToken = this.updateToken.bind(this);
+    this.clearToken = this.clearToken.bind(this);
   }
 
 
@@ -77,17 +112,10 @@ class Home extends React.Component<{}, StateType> {
       <div>
         <Router>
           <React.Fragment>
-            <Dashboard clickLogout={this.clearToken} updateToken={this.updateToken} sessionToken={this.state.sessionToken} />
             <Switch>
+            <Route exact path="/"><Dashboard state={this.state} clickLogout={this.clearToken} updateToken={this.updateToken} sessionToken={this.state.sessionToken} /></Route>
                 
-              <Route path="/" component={ Dashboard } />
-              {/* <Route exact path="/auth"><Auth state={this.state} updateToken={this.updateToken} /> </Route> */}
-              <Route path="/login"></Route>
-              <Route path="/register"></Route>
-              <Route exact path="/clan" component={ ClanDisplay } />
-              <Route exact path="/members" component={ Members } />
-              {/* <Route exact path="/events"><Events /></Route> */}
-              {/* <Route exact path="/contact" component={ ContactMe } /> */}
+          
             </Switch>
           </React.Fragment>
         </Router>

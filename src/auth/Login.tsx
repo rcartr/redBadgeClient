@@ -98,7 +98,7 @@ class Login extends React.Component<PropsType, StateType> {
                     autoComplete="email"
                     fullWidth
                     autoFocus
-                    onChange={(e) => this.stateEmail(e)}
+                    onChange={(event) => this.stateEmail(event)}
                 />
                 <TextField required
                     margin="normal"
@@ -109,7 +109,7 @@ class Login extends React.Component<PropsType, StateType> {
                     value={this.state.password}
                     autoComplete="current-password"
                     fullWidth
-                    onChange={(e) => this.statePassword(e)}
+                    onChange={(event) => this.statePassword(event)}
                 />
                 <Button className="authSubmit"
                     type="submit" variant="contained" fullWidth

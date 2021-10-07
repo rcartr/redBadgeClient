@@ -61,11 +61,10 @@ class Register extends React.Component<PropsType, StateType> {
         .then((res) => res.json())
         .then((data) => {
             this.props.updateToken(data.sessionToken)
-            console.log(data)
             if(data.message === "User successfully registered") {
                 return alert('Registration successful!')
             } else {
-                alert("Registration unsuccessful, please try again.")
+                return alert("Registration unsuccessful, please try again.")
             }
         })
         .catch(e => console.log(e))

@@ -3,12 +3,14 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
-import PublicIcon from '@mui/icons-material/Public';
+import EventNoteIcon from '@mui/icons-material/EventNote';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 
-import ClanCreate from '../clan/ClanCreate';
+// import { AppDialog, appDialogState } from '../helpers/AppDialog';
+import MemberAdd from '../members/MemberAdd';
 
 // helper for modals
 // const handleSubmitClick = () => console.log('Dialog?!');
@@ -20,8 +22,10 @@ type StateData = {
   description: string,
   owner: number,
   role: string,
-  email: string,
   clanId: number,
+  email: string,
+  password: string,
+  username: string,
   sessionToken: string,
 }
 
@@ -35,7 +39,7 @@ type StateType = {
   open: boolean,
 }
 
-export default class NavBarList extends React.Component<PropsType, StateType> {
+export default class NavBarList1 extends React.Component<PropsType, StateType> {
   constructor(props: PropsType) {
     super(props)
     this.state = {
@@ -58,29 +62,21 @@ export default class NavBarList extends React.Component<PropsType, StateType> {
   return(
   <div>
     <List>
-    <ListSubheader>Main</ListSubheader>
-   
-    <ListItem button  onClick={this.handleOpen}>
-      <ListItemIcon>
-        <PublicIcon />
-      </ListItemIcon>
-      <ListItemText primary="Create Clan" />
-    </ListItem>
-          <Dialog
-            id="createClanModal"
-            open={this.state.open}
-            onClose={this.handleClose}
-          >
-            <DialogContent>
-              <ClanCreate state={this.props.state} sessionToken={this.props.sessionToken} updateToken={this.props.updateToken} />
-            </DialogContent>
-          </Dialog>
-    {/* <ListItem button>
+    <ListItem button onClick={this.handleOpen}>
       <ListItemIcon>
         <PersonAddIcon />
       </ListItemIcon>
       <ListItemText primary="Add Member" />
     </ListItem>
+        <Dialog
+            id="addMemberModal"
+            open={this.state.open}
+            onClose={this.handleClose}
+          >
+            <DialogContent>
+                <MemberAdd state={this.props.state} sessionToken={this.props.sessionToken} updateToken={this.props.updateToken} />
+            </DialogContent>
+        </Dialog>
     <ListItem button>
       <ListItemIcon>
         <EventNoteIcon />
@@ -92,7 +88,7 @@ export default class NavBarList extends React.Component<PropsType, StateType> {
         <EmojiEventsIcon />
       </ListItemIcon>
       <ListItemText primary="Leaderboard" />
-    </ListItem> */}
+    </ListItem>
     </List>
     </div>
   );
