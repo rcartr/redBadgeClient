@@ -18,16 +18,38 @@
 }
 
 .main {
+  /* position: relative; */
+  text-align: left;
+}
+
+/* EVENTS ELEMENTS */
+.eventsDiv {
+  position: relative;
   text-align: left;
 }
 
 Button.buttonStyle {
+  /* position: absolute; */
   /* margin-top: 10px;
   margin-left: 5px;
   margin-right: 5px; */
   margin: 10px 5px 0px 5px;
+  bottom: 0;
 }
 
+/* CLAN ELEMENTS */
+.clanDiv {
+  position: relative;
+  text-align: left;
+  height: 240px;
+}
+
+Button.clanRefreshBtn {
+  position: absolute;
+  bottom: 0;
+}
+
+/* AUTH ELEMENTS */
 Button.authFlip {
   margin-bottom: 10px;
 }
@@ -44,8 +66,27 @@ Button.logoutButton {
   margin-left: 20px;
 }
 
+/* MEMBERS ELEMENTS */
+.membersDiv {
+  position: relative;
+  text-align: left;
+  height: 240px;
+}
+
+/* MODAL DIALOG ELEMENTS */
+Button.dialogButton {
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
 .rightAlignBox {
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
+}
+
+/* FOOTER */
+.footerDiv {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }

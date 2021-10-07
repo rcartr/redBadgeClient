@@ -2,15 +2,16 @@ import * as React from 'react'
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 // import Typography from '@mui/material/Typography';
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle'
-import DialogContent from '@mui/material/DialogContent'
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogActions from '@mui/material/DialogActions';
+// import Dialog from '@mui/material/Dialog';
+// import DialogTitle from '@mui/material/DialogTitle'
+// import DialogContent from '@mui/material/DialogContent'
+// import DialogContentText from '@mui/material/DialogContentText';
+// import DialogActions from '@mui/material/DialogActions';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 
-import APIURL from "../helpers/environment";
+import APIURL from '../helpers/environment';
+import { AppDialog, appDialogState } from '../helpers/AppDialog'
 
 type StateData = {
     login: boolean,
@@ -44,36 +45,9 @@ class Register extends React.Component<PropsType, StateType> {
             open: false
         }
         this.handleRegister = this.handleRegister.bind(this);
-        this.confirmRegisterDialog = this.confirmRegisterDialog.bind(this);
     }
 
-    confirmRegisterDialog() {
-        
-      
-      
-        return (
-            <div>
-                <Dialog
-                    open={true}
-                    onClose={() => this.setState(previousState => ({open: !previousState.open}))}
-                >
-                    <DialogTitle>
-                        Success!
-                    </DialogTitle>
-                    <DialogContent>
-                        <DialogContentText>
-                            Registration successful!
-                        </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={() => this.setState(previousState => ({open: !previousState.open}))} autoFocus>
-                            OK
-                        </Button>
-                    </DialogActions>
-                </Dialog>
-            </div>
-        )
-    }
+    handleSubmitClick = () => console.log('Dialog?!');
 
     handleRegister(event: any) {
         event.preventDefault()
@@ -87,11 +61,10 @@ class Register extends React.Component<PropsType, StateType> {
         .then((res) => res.json())
         .then((data) => {
             this.props.updateToken(data.sessionToken)
-            console.log(data)
-            if(data.message === "User Successfully registered") {
-                return (this.confirmRegisterDialog)
+            if(data.message === "User successfully registered") {
+                return alert('Registration successful!')
             } else {
-                alert("Registration unsuccessful, please try again.")
+                return alert("Registration unsuccessful, please try again.")
             }
         })
         .catch(e => console.log(e))
@@ -162,9 +135,11 @@ class Register extends React.Component<PropsType, StateType> {
                     value={this.state.username}
                 />
                 <Button className="authSubmit" 
-                    type="submit" variant="contained" fullWidth >
+                    type="submit" variant="contained" fullWidth 
+                    onClick={() => appDialogState('Registration successful!', this.handleSubmitClick)}>
                     Submit
                 </Button>
+                <AppDialog />
             </Box>
         </ThemeProvider>
         );
