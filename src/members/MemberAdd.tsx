@@ -87,7 +87,7 @@ export default class MemberAdd extends React.Component<PropsType, StateType> {
                     onChange={(event) => this.stateEmail(event)}
                     value={this.state.email}
                 />
-                    <FormControlLabel control={<Checkbox id="leaderSelect"/>} label="Leader" />
+                    <FormControlLabel control={<Checkbox id="leaderSelect"/>} label="Leadership role" />
                     <Button className="authSubmit" 
                     type="submit" variant="contained" fullWidth 
                     onClick={() => appDialogState('Member added!', this.handleSubmitClick)}>

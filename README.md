@@ -11,7 +11,7 @@ Upon visiting the site, you will see the main dashboard. I have built everything
 
 To log in, a user simply clicks on the Login button and is presented with a two-in-one dialog where they are presented with the option to register or flip to logging in via a clever ternary adapted from a previous project in the course. I struggled with a responsive action for logging in or registering, but did manage to implement a custom reusable dialog that I used to alert the user upon certain actions.
 
-After logging in, the functionality of the site opens up and the user is able to make use of what has been completed to this point. The dialogs are closable by simply clicking out of the box.
+After logging in, the functionality of the site opens up and the user is able to make use of what has been completed to this point. The dialogs are closable by simply clicking out of the box. Do not yet have properly setup protected routes, but plan to reconfigure the setup to implement it.
 
 #### Dependencies
 For this client app, we needed to use React with TypeScript. I also decided to use Material UI for the interface library and made extensive use of some of its features. Overall I am quite happy with the UI for the app, but there are UI elements I feel could be improved upon a great deal through further development. I also made use of zustand for the custom reusable dialog.
